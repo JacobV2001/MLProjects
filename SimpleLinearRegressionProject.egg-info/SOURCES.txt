@@ -1,0 +1,8 @@
+README.md
+setup.py
+SimpleLinearRegressionProject.egg-info/PKG-INFO
+SimpleLinearRegressionProject.egg-info/SOURCES.txt
+SimpleLinearRegressionProject.egg-info/dependency_links.txt
+SimpleLinearRegressionProject.egg-info/requires.txt
+SimpleLinearRegressionProject.egg-info/top_level.txt
+src/__init__.py
