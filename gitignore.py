@@ -92,7 +92,7 @@ ipython_config.py
 #Pipfile.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+__pypackages__/ 
 
 # Celery stuff
 celerybeat-schedule
@@ -126,8 +126,4 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
-<<<<<<< HEAD
 .pyre/
-=======
-.pyre/
->>>>>>> b53a3f0ae09c50dde71bcb8239993372772ca6ee
