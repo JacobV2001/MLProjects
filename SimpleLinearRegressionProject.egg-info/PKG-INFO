@@ -5,4 +5,7 @@ Author: Jacob
 Author-email: Jacobiv2001@gmail.com
 Requires-Dist: numpy
 Requires-Dist: pandas
+Requires-Dist: matplotlib
 Requires-Dist: seaborn
+Requires-Dist: ipykernel
+Requires-Dist: scikit-learn
