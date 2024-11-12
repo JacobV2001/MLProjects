@@ -3,6 +3,9 @@ pandas
 matplotlib
 seaborn
 scikit-learn
+ipykernel
 dill
 flask
+flask_cors
+lime
 -e .
