@@ -1,0 +1,23 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Salary Indicator</h1>
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Salary Predictor</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">Insert Years Of Experience</label>
+            <input class="form-control" type="number" name="years_experience"
+                placeholder="Enter years" min='0' max='100' />
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict your Salary" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
