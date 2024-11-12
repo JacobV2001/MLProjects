@@ -16,7 +16,7 @@ from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path=os.path.join('artifact', "preprocessor.pkl")
+    preprocessor_obj_file_path=os.path.join('artifacts', "preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
@@ -25,24 +25,26 @@ class DataTransformation:
     # To get pkl files
     def get_data_transformer_object(self):
         """
-        This function is responsible for data transformation
+        This function is responsible for data transformation.
+        In this case it will return a simple version since no data tranfomation is needed
         """
         try:
             numerical_columns = ['YearsExperience']
 
-            num_pipeline = Pipeline(
-                steps=[
-                    ("imputer", SimpleImputer(strategy="median")),
-                    ("scaler", StandardScaler())
-                ]
-            )
+            #num_pipeline = Pipeline(
+            #    steps=[
+            #        ("imputer", SimpleImputer(strategy="median")),
+            #        ("scaler", StandardScaler())
+            #    ]
+            #)
 
-            logging.info("Numerical Columns Standard Scaling Completed")
-            logging.info(f"Numerical columns: {numerical_columns}")
+            #logging.info("Numerical Columns Standard Scaling Completed")
+            #logging.info(f"Numerical columns: {numerical_columns}")
 
             preprocessor = ColumnTransformer(
                 [
-                    ("num_pipeline", num_pipeline, numerical_columns)
+                    ("num", "passthrough", numerical_columns)
+                    #("num_pipeline", num_pipeline, numerical_columns)
                 ]
             )
 
@@ -63,24 +65,28 @@ class DataTransformation:
 
             preprocessing_obj = self.get_data_transformer_object()
 
-            target_column_name = ['Salary', 'Unnamed: 0']
-            numerical_columns = ["YearsExperience"]
+            target_column_name = ['Salary']
+            numerical_columns = ['YearsExperience']
 
-            input_feature_train_df = train_df.drop(columns=target_column_name, axis=1)
+            input_feature_train_df = train_df[numerical_columns]
 
             target_feature_train_df = train_df[target_column_name]
 
-            input_feature_test_df = test_df.drop(columns=target_column_name, axis=1)
+            input_feature_test_df = test_df[numerical_columns]
             target_feature_test_df = test_df[target_column_name]
+
+            """print(input_feature_train_df)
+            print(target_feature_train_df)
+            print(input_feature_test_df)
+            print(target_feature_test_df)"""
+            
 
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe.")
 
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.fit_transform(input_feature_test_df)
 
-            train_arr = np.c_[
-                input_feature_train_arr, np.array(target_feature_train_df)
-            ]
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
             logging.info(f"Saved preprocessing object.")
